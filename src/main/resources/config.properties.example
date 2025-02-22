@@ -1,0 +1,3 @@
+bot.token="The token id"
+welcome.message.id="The welcome message id"
+presentation.channel.id="the presentation channel id"
