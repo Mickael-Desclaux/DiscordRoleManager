@@ -4,6 +4,7 @@ import com.discord.role_manager.config.Config;
 import com.discord.role_manager.listeners.RoleManagementListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class App
@@ -21,6 +22,7 @@ public class App
                         GatewayIntent.MESSAGE_CONTENT
                 )
                 .addEventListeners(new RoleManagementListener(token, welcomeMessageId, presentationChannelId))
+                .setActivity(Activity.playing("C'est un test"))
                 .build();
     }
 

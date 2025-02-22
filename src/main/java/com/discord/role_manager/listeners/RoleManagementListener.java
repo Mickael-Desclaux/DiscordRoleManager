@@ -1,12 +1,12 @@
 package com.discord.role_manager.listeners;
 
-import com.discord.role_manager.config.Config;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class RoleManagementListener extends ListenerAdapter {
 
@@ -19,7 +19,7 @@ public class RoleManagementListener extends ListenerAdapter {
         this.WELCOME_MESSAGE_ID = welcomeMessageId;
         this.PRESENTATION_CHANNEL_ID = presentationChannelId;
 
-        this.jda = JDABuilder.createDefault(token)
+        this.jda = JDABuilder.createDefault(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
                 .addEventListeners(this)
                 .build();
     }
