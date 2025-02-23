@@ -1,16 +1,12 @@
 package com.discord.role_manager.listeners;
-
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
+import com.discord.role_manager.enums.UserRole;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 
 public class RoleManagementListener extends ListenerAdapter {
 
-    private final JDA jda;
     private final String WELCOME_MESSAGE_ID;
     private final String PRESENTATION_CHANNEL_ID;
     private final String WELCOME_EMOJI = "✅";
@@ -18,29 +14,23 @@ public class RoleManagementListener extends ListenerAdapter {
     public RoleManagementListener(String token, String welcomeMessageId, String presentationChannelId) {
         this.WELCOME_MESSAGE_ID = welcomeMessageId;
         this.PRESENTATION_CHANNEL_ID = presentationChannelId;
-
-        this.jda = JDABuilder.createDefault(token, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
-                .addEventListeners(this)
-                .build();
     }
 
     @Override
     public void onMessageReactionAdd(MessageReactionAddEvent event) {
         if (event.getMessageId().equals(WELCOME_MESSAGE_ID)) {
-            if (event.getEmoji().asUnicode().equals(WELCOME_EMOJI)) {
-                Role newRole = event.getGuild().getRolesByName("Nouveau", true).stream()
+            if (event.getEmoji().getName().equals(WELCOME_EMOJI)) {
+                net.dv8tion.jda.api.entities.Role newRole = event.getGuild().getRolesByName(UserRole.NOUVEAU.toString(), true).stream()
                         .findFirst()
-                        .orElseGet(() -> {
-                            return event.getGuild().createRole()
-                                    .setName("Nouveau")
-                                    .complete();
-                        });
+                        .orElseGet(() -> event.getGuild().createRole()
+                                .setName(UserRole.NOUVEAU.toString())
+                                .complete());
 
                 event.getGuild().addRoleToMember(event.getMember(), newRole).queue(
                         success -> {
                             event.getUser().openPrivateChannel().queue(channel ->
-                                    channel.sendMessage("Bienvenue sur le serveur In Progress ! N'oublies pas" +
-                                            "de te présenter dans le channel #présentation pour obtenir le rôle de" +
+                                    channel.sendMessage("Bienvenue sur le serveur In Progress ! N'oublies pas " +
+                                            "de te présenter dans le channel #présentation pour obtenir le rôle de " +
                                             "membre et accéder à l'intégralité des fonctionnalités du serveur !").queue());
                         },
                         error -> System.out.println("Erreur lors de l'ajout du rôle : " + error.getMessage())
@@ -53,18 +43,26 @@ public class RoleManagementListener extends ListenerAdapter {
     public void onMessageReceived(MessageReceivedEvent event) {
         if (event.getChannel().getId().equals(PRESENTATION_CHANNEL_ID)) {
             if (event.getMessage().getContentRaw().length() >= 50) {
-                Role memberRole = event.getGuild().getRolesByName("Membre", true).stream()
+                net.dv8tion.jda.api.entities.Role memberRole = event.getGuild().getRolesByName(UserRole.MEMBRE.toString(), true).stream()
                         .findFirst()
-                        .orElseGet(() -> {
-                            return event.getGuild().createRole()
-                                    .setName("Membre")
-                                    .complete();
-                        });
+                        .orElseGet(() -> event.getGuild().createRole()
+                                .setName(UserRole.MEMBRE.toString())
+                                .complete());
+
+                Role newRole = event.getGuild().getRolesByName(UserRole.NOUVEAU.toString(), true).stream()
+                        .findFirst()
+                        .orElse(null);
+
+                if (newRole != null) {
+                    event.getGuild().removeRoleFromMember(event.getMember(), newRole).queue();
+                } else {
+                    System.out.println("Le rôle 'Nouveau' est introuvable.");
+                }
 
                 event.getGuild().addRoleToMember(event.getMember(), memberRole).queue(
                         success -> {
                             event.getAuthor().openPrivateChannel().queue(
-                                    channel -> channel.sendMessage("Félicitation ! Tu as maintenant" +
+                                    channel -> channel.sendMessage("Félicitation ! Tu as maintenant " +
                                             "accès à l'intégralité du serveur In Progress !").queue()
                             );
                         },
