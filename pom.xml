@@ -37,7 +37,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.discord.role-manager.App</mainClass>
+              <mainClass>com.discord.role_manager.App</mainClass>
             </manifest>
           </archive>
         </configuration>
