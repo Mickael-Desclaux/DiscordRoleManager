@@ -39,3 +39,4 @@ build/
 
 src/main/resources/config.properties
 .env
+dependency-reduced-pom.xml
