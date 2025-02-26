@@ -11,6 +11,7 @@ public class App
     private String token = System.getenv("BOT_TOKEN");
     private String welcomeMessageId = System.getenv("WELCOME_MESSAGE_ID");
     private String presentationChannelId = System.getenv("PRESENTATION_CHANNEL_ID");
+    private String welcomeChannelId = System.getenv("WELCOME_CHANNEL_ID");
 
     public App() {
         this.jda = JDABuilder.createDefault(token)
@@ -19,7 +20,7 @@ public class App
                         GatewayIntent.GUILD_MESSAGE_REACTIONS,
                         GatewayIntent.MESSAGE_CONTENT
                 )
-                .addEventListeners(new RoleManagementListener(token, welcomeMessageId, presentationChannelId))
+                .addEventListeners(new RoleManagementListener(token, welcomeMessageId, welcomeChannelId, presentationChannelId))
                 .build();
     }
 
