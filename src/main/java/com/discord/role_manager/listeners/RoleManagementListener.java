@@ -83,7 +83,7 @@ public class RoleManagementListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         Member newMember = event.getMember();
-        String username = newMember.getUser().getName();
+        String username = newMember.getEffectiveName();
         String serverId = event.getGuild().getId();
         String welcomeChannelUrl = "https://discord.com/channels/" + serverId + "/" + WELCOME_CHANNEL_ID;
 
@@ -103,7 +103,7 @@ public class RoleManagementListener extends ListenerAdapter {
     private String SendWelcomeMessage(String username, String welcomeChannelUrl) {
 
         String message = String.format("\uD83C\uDF89 Bienvenue %s sur In Progress !\n\n" +
-                        "\uD83D\uDD39 Pour accéder au serveur, il te suffit de réagir au message dans le salon **[#bienvenue](%s)**\n" +
+                        "\uD83D\uDD39 Pour accéder au serveur, il te suffit de réagir au message dans le salon **[#bienvenue](%s)**\n\n" +
                         "Clique sur %s pour obtenir le rôle Nouveau et accéder aux discussions.\n\n" +
                         "\uD83D\uDCAC Une fois que c'est fait, tu pourras te présenter dans #présentation afin d'accéder à l'ensemble du serveur !\n\n" +
                         "\uD83D\uDE80 Hâte de faire ta connaissance et d'échanger avec toi !",
