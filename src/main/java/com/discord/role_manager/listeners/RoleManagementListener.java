@@ -89,9 +89,15 @@ public class RoleManagementListener extends ListenerAdapter {
 
         String welcomeMessage = SendWelcomeMessage(username, welcomeChannelUrl);
 
-        newMember.getUser().openPrivateChannel().queue((PrivateChannel privateChannel) -> {
-            privateChannel.sendMessage(welcomeMessage).queue();
-        });
+        newMember.getUser().openPrivateChannel().queue(
+                (PrivateChannel privateChannel) -> {
+                    privateChannel.sendMessage(welcomeMessage).queue(
+                            success -> System.out.println("Message de bienvenue envoyé à " + username),
+                            error -> System.out.println("Erreur lors de l'envoi du message à " + username + ": " + error.getMessage())
+                    );
+                },
+                error -> System.out.println("Impossible d'ouvrir un canal privé avec " + username + ": " + error.getMessage())
+        );
     }
 
     private String SendWelcomeMessage(String username, String welcomeChannelUrl) {

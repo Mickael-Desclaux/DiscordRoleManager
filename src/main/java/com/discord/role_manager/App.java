@@ -18,7 +18,8 @@ public class App
                 .enableIntents(
                         GatewayIntent.GUILD_MESSAGES,
                         GatewayIntent.GUILD_MESSAGE_REACTIONS,
-                        GatewayIntent.MESSAGE_CONTENT
+                        GatewayIntent.MESSAGE_CONTENT,
+                        GatewayIntent.GUILD_MEMBERS
                 )
                 .addEventListeners(new RoleManagementListener(welcomeMessageId, welcomeChannelId, presentationChannelId))
                 .build();
