@@ -14,9 +14,9 @@ public class RoleManagementListener extends ListenerAdapter {
     private final String WELCOME_CHANNEL_ID;
     private final String PRESENTATION_CHANNEL_ID;
 
-    private final String ROLE_NEW_MESSAGE = "";
-    private final String ROLE_MEMBER_MESSAGE = "";
-    private final String WELCOME_MESSAGE = "";
+    private final String ROLE_NEW_MESSAGE = "Bienvenue sur le serveur In Progress ! N'oublie pas de te présenter sur le " +
+            "canal #présentation pour accéder à l'intégralité du serveur !";
+    private final String ROLE_MEMBER_MESSAGE = "Félicitation, tu as maintenant accès à l'intégralité du serveur In Progress !";
     private final String WELCOME_EMOJI = "✅";
 
     public RoleManagementListener(String welcomeMessageId, String welcomeChannelId, String presentationChannelId) {
@@ -87,10 +87,10 @@ public class RoleManagementListener extends ListenerAdapter {
         String serverId = event.getGuild().getId();
         String welcomeChannelUrl = "https://discord.com/channels/" + serverId + "/" + WELCOME_CHANNEL_ID;
 
-        SendWelcomeMessage(username, welcomeChannelUrl);
+        String welcomeMessage = SendWelcomeMessage(username, welcomeChannelUrl);
 
         newMember.getUser().openPrivateChannel().queue((PrivateChannel privateChannel) -> {
-            privateChannel.sendMessage(WELCOME_MESSAGE).queue();
+            privateChannel.sendMessage(welcomeMessage).queue();
         });
     }
 
