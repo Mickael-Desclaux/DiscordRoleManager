@@ -19,9 +19,9 @@ public class RoleManagementListener extends ListenerAdapter {
     private final String WELCOME_MESSAGE = "";
     private final String WELCOME_EMOJI = "✅";
 
-    public RoleManagementListener(String token, String welcomeMessageId, String welcomeChannelId, String presentationChannelId) {
+    public RoleManagementListener(String welcomeMessageId, String welcomeChannelId, String presentationChannelId) {
         this.WELCOME_MESSAGE_ID = welcomeMessageId;
-        WELCOME_CHANNEL_ID = welcomeChannelId;
+        this.WELCOME_CHANNEL_ID = welcomeChannelId;
         this.PRESENTATION_CHANNEL_ID = presentationChannelId;
     }
 

@@ -20,7 +20,7 @@ public class App
                         GatewayIntent.GUILD_MESSAGE_REACTIONS,
                         GatewayIntent.MESSAGE_CONTENT
                 )
-                .addEventListeners(new RoleManagementListener(token, welcomeMessageId, welcomeChannelId, presentationChannelId))
+                .addEventListeners(new RoleManagementListener(welcomeMessageId, welcomeChannelId, presentationChannelId))
                 .build();
     }
 
