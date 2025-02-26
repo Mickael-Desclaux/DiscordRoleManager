@@ -101,11 +101,13 @@ public class RoleManagementListener extends ListenerAdapter {
     }
 
     private String SendWelcomeMessage(String username, String welcomeChannelUrl) {
-        String message = String.format("\uD83C\uDF89 Bienvenue " + username + " sur In Progress ! " + System.lineSeparator()
-        + "\uD83D\uDD39 Pour accéder au serveur, il te suffit de réagir au message dans le salon " + "**[#bienvenue](" + welcomeChannelUrl
-        + ")** !" + System.lineSeparator() + "Clique sur " + WELCOME_EMOJI + " pour obtenir le rôle Nouveau et accéder aux discussions."
-        + "\uD83D\uDCAC Une fois que c’est fait, tu pourras te présenter dans présentation afin d'accéder à l'ensemble du serveur !"
-        + "\uD83D\uDE80 Hâte de faire ta connaissance et d’échanger avec toi ! ");
+
+        String message = String.format("\uD83C\uDF89 Bienvenue %s sur In Progress !\n\n" +
+                        "\uD83D\uDD39 Pour accéder au serveur, il te suffit de réagir au message dans le salon **[#bienvenue](%s)**\n" +
+                        "Clique sur %s pour obtenir le rôle Nouveau et accéder aux discussions.\n\n" +
+                        "\uD83D\uDCAC Une fois que c'est fait, tu pourras te présenter dans #présentation afin d'accéder à l'ensemble du serveur !\n\n" +
+                        "\uD83D\uDE80 Hâte de faire ta connaissance et d'échanger avec toi !",
+                        username, welcomeChannelUrl, WELCOME_EMOJI);
 
         return message;
     }
