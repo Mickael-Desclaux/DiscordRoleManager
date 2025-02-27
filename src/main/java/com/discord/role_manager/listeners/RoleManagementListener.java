@@ -77,7 +77,6 @@ public class RoleManagementListener extends ListenerAdapter {
 
                 event.getGuild().addRoleToMember(event.getMember(), memberRole).queue(
                         success -> {
-
                             String serverId = event.getGuild().getId();
                             String username = event.getMember().getEffectiveName();
                             String questionChannelUrl = "https://discord.com/channels/" + serverId + "/" + QUESTION_CHANNEL_ID;
@@ -91,6 +90,14 @@ public class RoleManagementListener extends ListenerAdapter {
                         },
                         error -> System.out.println("Erreur lors de l'ajout du rôle : " + error.getMessage())
                 );
+            } else {
+                event.getAuthor().openPrivateChannel().queue(
+                        channel -> channel.sendMessage("Bonjour " + event.getMember().getEffectiveName() +
+                                ", votre présentation dans le canal #présentation est trop courte. " +
+                                "Pour obtenir le rôle de membre, veuillez écrire une présentation d'au moins 50 caractères.").queue()
+                );
+
+                event.getMessage().delete().queue();
             }
         }
     }
