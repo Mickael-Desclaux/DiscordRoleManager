@@ -128,7 +128,7 @@ public class RoleManagementListener extends ListenerAdapter {
     }
 
     private String sendNewRoleMessage(String username, String presentationChannelUrl) {
-        String message = String.format("Bienvenue sur In Progress, %s ! Tu as maintenant accès à une partie du serveur.\n\n" +
+        String message = String.format("\uD83C\uDF89 Bienvenue sur In Progress, %s ! Tu as maintenant accès à une partie du serveur.\n\n" +
                         "Prochaine étape → Prends une minute pour te présenter dans **[#présentation](%s)** !\n\n" +
                         "Quelques mots sur toi :\n" +
                         "• Ton prénom ou pseudo\n" +
@@ -141,12 +141,12 @@ public class RoleManagementListener extends ListenerAdapter {
     }
 
     private String sendMemberRoleMessage(String username, String questionChannelUrl, String projectSharingChannelUrl) {
-        String message = String.format("Bienvenue officiellement parmi nous, %s ! Tu fais maintenant partie des Membres et as accès à tous les salons.\n\n" +
-                        "Tu peux maintenant :\n" +
-                        "• Poser tes questions tech dans **[#questions-tech](%s)**\n" +
-                        "• Partager tes projets dans **[#partage-de-projets](%s)**\n" +
+        String message = String.format("\uD83C\uDF89 Bienvenue officiellement parmi nous, %s ! Tu fais maintenant partie des Membres et as accès à tous les salons.\n\n" +
+                        "\uD83D\uDCA1 Tu peux maintenant :\n" +
+                        "• Poser tes questions tech dans \uD83D\uDCA1 **[#questions-tech](%s)**\n" +
+                        "• Partager tes projets dans \uD83D\uDCE2 **[#partage-de-projets](%s)**\n" +
                         "• Discuter librement avec la communauté\n\n" +
-                        "Ici, on s'entraide et on avance ensemble. Hâte d'échanger avec toi !",
+                        "Ici, on s'entraide et on avance ensemble. Hâte d'échanger avec toi ! \uD83D\uDE80",
                 username, questionChannelUrl, projectSharingChannelUrl);
 
         return message;
