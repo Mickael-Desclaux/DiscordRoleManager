@@ -12,6 +12,8 @@ public class App
     private String welcomeMessageId = System.getenv("WELCOME_MESSAGE_ID");
     private String presentationChannelId = System.getenv("PRESENTATION_CHANNEL_ID");
     private String welcomeChannelId = System.getenv("WELCOME_CHANNEL_ID");
+    private String questionChannelId = System.getenv("QUESTION_CHANNEL_ID");
+    private String projectSharingChannelId = System.getenv("PROJECT_SHARING_CHANNEL_ID");
 
     public App() {
         this.jda = JDABuilder.createDefault(token)
@@ -21,7 +23,12 @@ public class App
                         GatewayIntent.MESSAGE_CONTENT,
                         GatewayIntent.GUILD_MEMBERS
                 )
-                .addEventListeners(new RoleManagementListener(welcomeMessageId, welcomeChannelId, presentationChannelId))
+                .addEventListeners(new RoleManagementListener(
+                        welcomeMessageId,
+                        welcomeChannelId,
+                        presentationChannelId,
+                        questionChannelId,
+                        projectSharingChannelId))
                 .build();
     }
 
