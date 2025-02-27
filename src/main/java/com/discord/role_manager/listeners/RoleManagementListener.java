@@ -142,7 +142,7 @@ public class RoleManagementListener extends ListenerAdapter {
 
     private String sendMemberRoleMessage(String username, String questionChannelUrl, String projectSharingChannelUrl) {
         String message = String.format("\uD83C\uDF89 Bienvenue officiellement parmi nous, %s ! Tu fais maintenant partie des Membres et as accès à tous les salons.\n\n" +
-                        "\uD83D\uDCA1 Tu peux maintenant :\n" +
+                        "\uD83D\uDCA1 Tu peux maintenant :\n\n" +
                         "• Poser tes questions tech dans \uD83D\uDCA1 **[#questions-tech](%s)**\n" +
                         "• Partager tes projets dans \uD83D\uDCE2 **[#partage-de-projets](%s)**\n" +
                         "• Discuter librement avec la communauté\n\n" +
